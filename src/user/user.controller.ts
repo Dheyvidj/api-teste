@@ -21,11 +21,6 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // @Get('email')
-  // getEmail(@Body() createUserDto: CreateUserDto) {
-  //   return this.userService.findByEmail(createUserDto.email);
-  // }
-
   @Get()
   findAll() {
     return this.userService.findAll();
