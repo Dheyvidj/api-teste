@@ -1,3 +1,4 @@
 export interface UserToken {
-  acces_token: string;
+  user: any;
+  token: string;
 }
