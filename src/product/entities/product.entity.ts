@@ -5,6 +5,6 @@ export class Product implements Prisma.ProductUncheckedCreateInput {
   name: string;
   description: string;
   price: number;
-  images: string;
-  class: string;
+  images?: string;
+  class?: string;
 }

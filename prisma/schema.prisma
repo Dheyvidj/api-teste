@@ -22,6 +22,6 @@ model Product {
   name          String  @unique
   description   String
   price         Float
-  images        String
-  class         String
+  images        String?
+  class         String?
 }

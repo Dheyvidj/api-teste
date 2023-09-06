@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Product } from '../entities/product.entity';
 
 export class CreateProductDto extends Product {
@@ -9,7 +9,9 @@ export class CreateProductDto extends Product {
   @IsNumber()
   price: number;
   @IsUrl()
-  images: string;
+  @IsOptional()
+  images?: string;
   @IsString()
-  class: string;
+  @IsOptional()
+  class?: string;
 }
