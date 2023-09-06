@@ -12,6 +12,15 @@ pipeline {
                 sh 'npm install prisma --global'
                 sh 'npx prisma migrate deploy'
                 sh 'npx prisma generate'
+                sh 'npm build' 
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh 'npm install' 
+                sh 'npm install prisma --global'
+                sh 'npx prisma migrate deploy'
+                sh 'npx prisma generate'
             }
         }
     }
