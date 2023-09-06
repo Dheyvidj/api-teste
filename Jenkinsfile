@@ -1,43 +1,22 @@
 pipeline {
-     /*
-     agent {  
+    agent {
         docker {
-            image 'node' 
-            args '-p 3000:3000' 
-        }  
+            image 'node:18.17.1-alpine3.18' 
+            args '-p 8080:8080' 
+        }
     }
-*/
-    agent any
     stages {
         stage('Build') { 
             steps {
-                echo "building states"
-                sh 'node -v' 
                 sh 'npm install' 
-                
             }
         }
-         stage('Test') { 
+        stage('Deliver') { 
             steps {
-                echo "testing stage"
-                sh "npm test"
-            }
-        }
-         
-         stage('Deploy') { 
-            steps {
-                echo "Deploying..."
-               
+                sh './jenkins/scripts/deliver.sh' 
+                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
+                sh './jenkins/scripts/kill.sh' 
             }
         }
     }
-     post{
-          always{
-               echo "pipeline concluded."
-          }
-          success{
-               echo "all stages executed with success."
-               sh 'npm start'
-          }
-     }
 }
