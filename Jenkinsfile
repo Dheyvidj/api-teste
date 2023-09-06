@@ -1,26 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18.17.1-alpine3.18' 
-            args '-p 8080:8080' 
-        }
-    }
+    agent any
+    
     stages {
-        stage('Build') { 
+        stage('Checkout') {
             steps {
-                sh 'npm install' 
-                sh 'npm install prisma --global'
-                sh 'npx prisma migrate deploy'
-                sh 'npx prisma generate'
-                sh 'npm build' 
+                // Clona o repositório Git
+                checkout scm
             }
         }
-        stage('Deploy') { 
+        
+        stage('Deploy') {
             steps {
-                sh 'npm install' 
-                sh 'npm install prisma --global'
-                sh 'npx prisma migrate deploy'
-                sh 'npx prisma generate'
+                // Execute comandos de deploy aqui (ex: Kubernetes, Docker Compose, etc.)
+                sh 'docker-compose up -d'
             }
         }
     }
